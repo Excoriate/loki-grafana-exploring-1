@@ -1,0 +1,35 @@
+repos:
+    # general use of hooks
+    - repo: git://github.com/pre-commit/pre-commit-hooks
+      rev: v4.0.1
+      hooks:
+        - id: check-executables-have-shebangs
+        - id: check-yaml
+        - id: double-quote-string-fixer
+        - id: check-executables-have-shebangs
+        - id: check-json
+        - id: trailing-whitespace
+        - id: check-case-conflict
+        - id: check-merge-conflict
+#        - id: detect-aws-credentials
+        - id: check-added-large-files
+          args:
+             - "--maxkb=1024"
+
+    # terraform specific hooks
+    -  repo: https://github.com/Excoriate/terraform-precommit-hooks.git
+       rev: v0.0.9
+       hooks:
+        -  id: terraform-clean
+           args:
+              - "--dir=terraform/service"
+        -  id: terraform-fmt
+           args:
+              - "--dir=terraform/service"
+        -  id: terraform-validate
+           args:
+              - "--dir=terraform/service"
+        - id: terraform-lint
+          args:
+            - "--dir=terraform/service"
+            - "--module=true"
